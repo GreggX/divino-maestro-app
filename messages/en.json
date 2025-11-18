@@ -1,0 +1,206 @@
+{
+  "common": {
+    "appName": "Divino Maestro",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search",
+    "filter": "Filter",
+    "clear": "Clear",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "dontHaveAccount": "Don't have an account?",
+    "alreadyHaveAccount": "Already have an account?",
+    "createAccount": "Create Account",
+    "signInTitle": "Sign in to your account",
+    "signInDescription": "Welcome back! Please enter your credentials.",
+    "signUpTitle": "Create your account",
+    "signUpDescription": "Get started with your new account today.",
+    "emailPlaceholder": "you@example.com",
+    "passwordPlaceholder": "Enter your password",
+    "namePlaceholder": "John Doe",
+    "createPasswordPlaceholder": "Create a password"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "vigilias": "Vigils",
+    "socios": "Members",
+    "actas": "Meeting Minutes",
+    "reports": "Reports",
+    "settings": "Settings"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome back, {email}!",
+    "profile": {
+      "title": "Profile",
+      "description": "Manage your account settings",
+      "content": "Update your personal information and preferences."
+    },
+    "security": {
+      "title": "Security",
+      "description": "Manage your security settings",
+      "content": "Update your password and security preferences."
+    },
+    "activity": {
+      "title": "Activity",
+      "description": "View your recent activity",
+      "content": "Track your recent actions and updates."
+    }
+  },
+  "vigilia": {
+    "title": "Vigil",
+    "create": "Create Vigil",
+    "edit": "Edit Vigil",
+    "delete": "Delete Vigil",
+    "date": "Date",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "turnNumber": "Turn Number",
+    "patron": "Patron Saint",
+    "chaplain": "Chaplain",
+    "chief": "Chief",
+    "torchBearers": "Torch Bearers",
+    "massHelpers": "Mass Helpers",
+    "observations": "Observations",
+    "status": {
+      "programada": "Scheduled",
+      "en_curso": "In Progress",
+      "finalizada": "Completed",
+      "cancelada": "Cancelled"
+    }
+  },
+  "socio": {
+    "title": "Member",
+    "titlePlural": "Members",
+    "create": "Add Member",
+    "edit": "Edit Member",
+    "delete": "Delete Member",
+    "fullName": "Full Name",
+    "type": "Type",
+    "class": "Member Class",
+    "orderNumber": "Order Number",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "admissionDate": "Admission Date",
+    "trialDate": "Trial Date",
+    "activationDate": "Activation Date",
+    "active": "Active",
+    "inactive": "Inactive",
+    "presentedBy": "Presented By",
+    "distinctions": "Distinctions",
+    "notes": "Notes",
+    "types": {
+      "socio": "Member",
+      "aspirante": "Aspirant",
+      "primera": "First Class"
+    },
+    "classes": {
+      "aspirante": "Aspirant",
+      "prueba": "Trial",
+      "activo": "Active",
+      "honorario": "Honorary",
+      "baja": "Removed",
+      "inactivo": "Inactive"
+    }
+  },
+  "acta": {
+    "title": "Meeting Minutes",
+    "titlePlural": "Meeting Minutes",
+    "create": "Create Minutes",
+    "edit": "Edit Minutes",
+    "delete": "Delete Minutes",
+    "date": "Meeting Date",
+    "location": "Location",
+    "reference": "Reference Number",
+    "meeting": {
+      "title": "Meeting Details",
+      "startTime": "Start Time",
+      "readGeneralOrder": "Read General Order",
+      "inscriptionTime": "Inscription Time",
+      "serviceTime": "Service Time",
+      "massTime": "Mass Time"
+    },
+    "attendance": {
+      "title": "Attendance",
+      "active": "Active Members",
+      "trial": "Trial Members",
+      "communions": "Communions",
+      "aspirants": "Aspirants",
+      "extraordinary": "Extraordinary"
+    },
+    "readings": {
+      "title": "Readings",
+      "circulars": "Circulars",
+      "correspondence": "Correspondence"
+    },
+    "movements": {
+      "title": "Member Movements",
+      "trial": "Trial Vigil",
+      "activeApplications": "Active Membership Applications",
+      "honoraryApplications": "Honorary Membership Applications",
+      "addressChanges": "Address Changes",
+      "removalProposals": "Removal Proposals",
+      "distinctionProposals": "Distinction Proposals"
+    },
+    "collection": {
+      "title": "Collection",
+      "monthlyReceipts": "Monthly Receipts",
+      "feeDebts": "Fee Debts",
+      "seeds": "Seeds",
+      "honoraries": "Honoraries",
+      "others": "Others",
+      "total": "Total"
+    },
+    "signatures": {
+      "title": "Signatures",
+      "chief": "Chief of Turn",
+      "secretary": "Secretary",
+      "treasurer": "Treasurer"
+    },
+    "otherMatters": "Other Matters"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Invalid email address",
+    "minLength": "Must be at least {min} characters",
+    "maxLength": "Must be no more than {max} characters",
+    "min": "Must be at least {min}",
+    "max": "Must be no more than {max}",
+    "invalidFormat": "Invalid format"
+  },
+  "errors": {
+    "generic": "An error occurred",
+    "notFound": "Not found",
+    "unauthorized": "Unauthorized",
+    "forbidden": "Forbidden",
+    "serverError": "Server error",
+    "networkError": "Network error"
+  },
+  "success": {
+    "saved": "Saved successfully",
+    "created": "Created successfully",
+    "updated": "Updated successfully",
+    "deleted": "Deleted successfully"
+  }
+}

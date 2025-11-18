@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run typecheck:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run test)",
+      "Bash(npm run build:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm run lint:fix:*)",
+      "Bash(npm test)",
+      "Bash(cat:*)",
+      "Bash(test:*)",
+      "Bash(echo:*)",
+      "Bash(unset NODE_ENV:*)",
+      "Bash(npx @next/codemod@canary next-lint-to-eslint-cli:*)",
+      "Bash(pgrep:*)",
+      "Bash(npx playwright test:*)",
+      "Bash(npx playwright install)",
+      "Bash(node -e:*)",
+      "Bash(curl:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill -9)",
+      "Bash(./test-registration.sh:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(./test-auth.sh:*)",
+      "Bash(npm run test:e2e:*)",
+      "WebSearch",
+      "Bash(npx husky init)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

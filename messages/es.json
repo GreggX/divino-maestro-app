@@ -1,0 +1,206 @@
+{
+  "common": {
+    "appName": "Divino Maestro",
+    "loading": "Cargando...",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "create": "Crear",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "clear": "Limpiar",
+    "submit": "Enviar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "close": "Cerrar",
+    "confirm": "Confirmar",
+    "yes": "Sí",
+    "no": "No"
+  },
+  "auth": {
+    "signIn": "Iniciar Sesión",
+    "signUp": "Registrarse",
+    "signOut": "Cerrar Sesión",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "name": "Nombre",
+    "rememberMe": "Recordarme",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "dontHaveAccount": "¿No tienes una cuenta?",
+    "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+    "createAccount": "Crear Cuenta",
+    "signInTitle": "Inicia sesión en tu cuenta",
+    "signInDescription": "¡Bienvenido de nuevo! Por favor, ingresa tus credenciales.",
+    "signUpTitle": "Crea tu cuenta",
+    "signUpDescription": "Comienza con tu nueva cuenta hoy.",
+    "emailPlaceholder": "tu@ejemplo.com",
+    "passwordPlaceholder": "Ingresa tu contraseña",
+    "namePlaceholder": "Juan Pérez",
+    "createPasswordPlaceholder": "Crea una contraseña"
+  },
+  "navigation": {
+    "dashboard": "Panel",
+    "vigilias": "Vigilias",
+    "socios": "Socios",
+    "actas": "Actas de Junta",
+    "reports": "Reportes",
+    "settings": "Configuración"
+  },
+  "dashboard": {
+    "title": "Panel",
+    "welcome": "¡Bienvenido de nuevo, {email}!",
+    "profile": {
+      "title": "Perfil",
+      "description": "Administra la configuración de tu cuenta",
+      "content": "Actualiza tu información personal y preferencias."
+    },
+    "security": {
+      "title": "Seguridad",
+      "description": "Administra tu configuración de seguridad",
+      "content": "Actualiza tu contraseña y preferencias de seguridad."
+    },
+    "activity": {
+      "title": "Actividad",
+      "description": "Ve tu actividad reciente",
+      "content": "Rastrea tus acciones y actualizaciones recientes."
+    }
+  },
+  "vigilia": {
+    "title": "Vigilia",
+    "create": "Crear Vigilia",
+    "edit": "Editar Vigilia",
+    "delete": "Eliminar Vigilia",
+    "date": "Fecha",
+    "startTime": "Hora de Inicio",
+    "endTime": "Hora de Fin",
+    "turnNumber": "Número de Turno",
+    "patron": "Santo Titular",
+    "chaplain": "Capellán",
+    "chief": "Jefe",
+    "torchBearers": "Porta Hachas",
+    "massHelpers": "Ayudaron a la Misa",
+    "observations": "Observaciones",
+    "status": {
+      "programada": "Programada",
+      "en_curso": "En Curso",
+      "finalizada": "Finalizada",
+      "cancelada": "Cancelada"
+    }
+  },
+  "socio": {
+    "title": "Socio",
+    "titlePlural": "Socios",
+    "create": "Agregar Socio",
+    "edit": "Editar Socio",
+    "delete": "Eliminar Socio",
+    "fullName": "Nombre Completo",
+    "type": "Tipo",
+    "class": "Clase de Adorador",
+    "orderNumber": "Número de Orden",
+    "phone": "Teléfono",
+    "email": "Correo Electrónico",
+    "address": "Domicilio",
+    "admissionDate": "Fecha de Ingreso",
+    "trialDate": "Fecha de Prueba",
+    "activationDate": "Fecha de Activación",
+    "active": "Activo",
+    "inactive": "Inactivo",
+    "presentedBy": "Presentado Por",
+    "distinctions": "Distintivos",
+    "notes": "Notas",
+    "types": {
+      "socio": "Socio",
+      "aspirante": "Aspirante",
+      "primera": "De Primera"
+    },
+    "classes": {
+      "aspirante": "Aspirante",
+      "prueba": "Prueba",
+      "activo": "Activo",
+      "honorario": "Honorario",
+      "baja": "Baja",
+      "inactivo": "Inactivo"
+    }
+  },
+  "acta": {
+    "title": "Acta de Junta",
+    "titlePlural": "Actas de Junta",
+    "create": "Crear Acta",
+    "edit": "Editar Acta",
+    "delete": "Eliminar Acta",
+    "date": "Fecha de Junta",
+    "location": "Lugar",
+    "reference": "Referencia del Parte",
+    "meeting": {
+      "title": "Detalles de la Junta",
+      "startTime": "Hora de Inicio",
+      "readGeneralOrder": "Leyó Orden General",
+      "inscriptionTime": "Hora de Inscripción",
+      "serviceTime": "Hora del Servicio",
+      "massTime": "Hora de la Misa"
+    },
+    "attendance": {
+      "title": "Asistencia",
+      "active": "Activos",
+      "trial": "De Prueba",
+      "communions": "Comuniones",
+      "aspirants": "Aspirantes",
+      "extraordinary": "Extraordinaria"
+    },
+    "readings": {
+      "title": "Lecturas",
+      "circulars": "Circulares",
+      "correspondence": "Correspondencia"
+    },
+    "movements": {
+      "title": "Movimientos de Miembros",
+      "trial": "Vigilia de Prueba",
+      "activeApplications": "Solicitudes de Activos",
+      "honoraryApplications": "Solicitudes de Honorarios",
+      "addressChanges": "Cambios de Domicilio",
+      "removalProposals": "Propuestas de Baja",
+      "distinctionProposals": "Propuestas de Distintivos"
+    },
+    "collection": {
+      "title": "Colecta",
+      "monthlyReceipts": "Recibos del Mes",
+      "feeDebts": "Cuotas y Adeudos",
+      "seeds": "Semillas",
+      "honoraries": "Honorarios",
+      "others": "Otros",
+      "total": "Suma Total"
+    },
+    "signatures": {
+      "title": "Firmas",
+      "chief": "Jefe de Turno",
+      "secretary": "Secretario",
+      "treasurer": "Tesorero"
+    },
+    "otherMatters": "Otros Asuntos"
+  },
+  "validation": {
+    "required": "Este campo es requerido",
+    "email": "Correo electrónico inválido",
+    "minLength": "Debe tener al menos {min} caracteres",
+    "maxLength": "No debe tener más de {max} caracteres",
+    "min": "Debe ser al menos {min}",
+    "max": "No debe ser más de {max}",
+    "invalidFormat": "Formato inválido"
+  },
+  "errors": {
+    "generic": "Ocurrió un error",
+    "notFound": "No encontrado",
+    "unauthorized": "No autorizado",
+    "forbidden": "Prohibido",
+    "serverError": "Error del servidor",
+    "networkError": "Error de red"
+  },
+  "success": {
+    "saved": "Guardado exitosamente",
+    "created": "Creado exitosamente",
+    "updated": "Actualizado exitosamente",
+    "deleted": "Eliminado exitosamente"
+  }
+}

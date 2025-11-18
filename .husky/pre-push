@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run E2E tests before pushing
+echo "🧪 Running E2E tests..."
+npm run test:e2e
+
+# Run dependency audit
+echo "🔒 Running security audit..."
+npm audit --audit-level=high

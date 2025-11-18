@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run lint-staged (TypeScript check, linting, formatting, tests, secret scan)
+npm run lint-staged
