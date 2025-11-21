@@ -11,7 +11,7 @@ export default async function GuardsPage({ params }: PageProps) {
   const t = await getTranslations('vigilia.guardAssignment');
 
   // TODO: Fetch vigil and available members from database
-  const vigilId = params.id;
+  const { id: vigilId } = await params;
   const availableMembers = [];
   const timeBlocks = [];
 

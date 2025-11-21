@@ -11,7 +11,7 @@ export default async function MinutePage({ params }: PageProps) {
   const t = await getTranslations('vigilia.minuteWizard');
 
   // TODO: Fetch vigil data and calculate summaries
-  const vigilId = params.id;
+  const { id: vigilId } = await params;
   const vigilData = {
     asistencia: {
       activos: 0,

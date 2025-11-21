@@ -11,7 +11,7 @@ export default async function AttendancePage({ params }: PageProps) {
   const t = await getTranslations('vigilia.attendance');
 
   // TODO: Fetch vigil and members from database
-  const vigilId = params.id;
+  const { id: vigilId } = await params;
   const members = [];
 
   return (
