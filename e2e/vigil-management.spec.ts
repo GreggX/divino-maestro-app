@@ -260,11 +260,11 @@ test.describe('Minute Wizard', () => {
 
   test('should navigate to step 2 when next clicked', async ({ page }) => {
     // Click next button
-    await page.getByRole('button', { name: /next|siguiente/i }).click();
+    await page.getByRole('button', { name: /^(next|siguiente)$/i }).click();
 
     // Step 2 content should be visible
     await expect(
-      page.getByText(/administrative movements|movimientos.*administrativos/i)
+      page.getByRole('heading', { name: /administrative movements|movimientos.*administrativos/i })
     ).toBeVisible();
 
     await expect(
@@ -276,8 +276,8 @@ test.describe('Minute Wizard', () => {
     page,
   }) => {
     // Click next button twice
-    await page.getByRole('button', { name: /next|siguiente/i }).click();
-    await page.getByRole('button', { name: /next|siguiente/i }).click();
+    await page.getByRole('button', { name: /^(next|siguiente)$/i }).click();
+    await page.getByRole('button', { name: /^(next|siguiente)$/i }).click();
 
     // Step 3 content should be visible
     await expect(
@@ -291,7 +291,7 @@ test.describe('Minute Wizard', () => {
 
   test('should navigate back to step 1 from step 2', async ({ page }) => {
     // Go to step 2
-    await page.getByRole('button', { name: /next|siguiente/i }).click();
+    await page.getByRole('button', { name: /^(next|siguiente)$/i }).click();
 
     // Click previous button
     await page
@@ -313,8 +313,8 @@ test.describe('Minute Wizard', () => {
 
   test('should show generate minute button on step 3', async ({ page }) => {
     // Navigate to step 3
-    await page.getByRole('button', { name: /next|siguiente/i }).click();
-    await page.getByRole('button', { name: /next|siguiente/i }).click();
+    await page.getByRole('button', { name: /^(next|siguiente)$/i }).click();
+    await page.getByRole('button', { name: /^(next|siguiente)$/i }).click();
 
     // Generate minute button should be visible
     await expect(
@@ -325,14 +325,14 @@ test.describe('Minute Wizard', () => {
 
     // Next button should not be visible
     await expect(
-      page.getByRole('button', { name: /next|siguiente/i })
+      page.getByRole('button', { name: /^(next|siguiente)$/i })
     ).not.toBeVisible();
   });
 
   test('should allow updating checkbox on step 3', async ({ page }) => {
     // Navigate to step 3
-    await page.getByRole('button', { name: /next|siguiente/i }).click();
-    await page.getByRole('button', { name: /next|siguiente/i }).click();
+    await page.getByRole('button', { name: /^(next|siguiente)$/i }).click();
+    await page.getByRole('button', { name: /^(next|siguiente)$/i }).click();
 
     // Find and click checkbox
     const checkbox = page.getByRole('checkbox').first();
@@ -348,8 +348,8 @@ test.describe('Minute Wizard', () => {
     page,
   }) => {
     // Navigate to step 3
-    await page.getByRole('button', { name: /next|siguiente/i }).click();
-    await page.getByRole('button', { name: /next|siguiente/i }).click();
+    await page.getByRole('button', { name: /^(next|siguiente)$/i }).click();
+    await page.getByRole('button', { name: /^(next|siguiente)$/i }).click();
 
     // Find first textarea
     const textareas = page.getByRole('textbox');
@@ -367,8 +367,8 @@ test.describe('Minute Wizard', () => {
     page,
   }) => {
     // Navigate to step 3
-    await page.getByRole('button', { name: /next|siguiente/i }).click();
-    await page.getByRole('button', { name: /next|siguiente/i }).click();
+    await page.getByRole('button', { name: /^(next|siguiente)$/i }).click();
+    await page.getByRole('button', { name: /^(next|siguiente)$/i }).click();
 
     // Find chief input
     const chiefInput = page.getByPlaceholder(/chief|jefe/i);
