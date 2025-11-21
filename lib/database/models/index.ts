@@ -11,12 +11,9 @@ export { default as Verification } from './Verification';
 
 // Application Models
 export { default as Seccion } from './Seccion';
-export { default as Socio } from './Socio';
-export { default as Vigilia } from './Vigilia';
-export { default as Asistencia } from './Asistencia';
-export { default as Cuota } from './Cuota';
-export { default as GuardiaTurno } from './GuardiaTurno';
-export { default as ActaJunta } from './ActaJunta';
+export { default as Member } from './Member';
+export { default as Vigil } from './Vigil';
+export { default as Minute } from './Minute';
 
 // Type Exports - Authentication Models
 export type { IUser } from './User';
@@ -26,25 +23,29 @@ export type { IVerification } from './Verification';
 
 // Type Exports - Application Models
 export type { ISeccion } from './Seccion';
-export type { ISocio, IHistorialEstado } from './Socio';
-export type { IVigilia } from './Vigilia';
-export type { IAsistencia } from './Asistencia';
-export type { ICuota } from './Cuota';
-export type { IGuardiaTurno } from './GuardiaTurno';
+export type { IMember, IDireccion } from './Member';
 export type {
-  IActaJunta,
-  IJuntaDetalle,
-  IAsistenciaResumen,
-  IAsistenciaExtraordinaria,
+  IVigil,
+  IFinanzasIndividual,
+  IAsistenciaMiembro,
+  ITurnoEspecifico,
+  IBloqueHora,
+  IRolesEspeciales,
+} from './Vigil';
+export type {
+  IMinute,
+  IHorarios,
   ILecturas,
   IVigiliaPrueba,
   ISolicitudMiembro,
   ICambioDomicilio,
-  IPropuestaBaja,
-  IPropuestaDistintivo,
-  IMovimientosMiembros,
+  IBaja,
+  IDistintivo,
+  IMovimientos,
+  IAsistenciaExtraordinariaDetalle,
+  IEstadisticasAsistencia,
   IOtroConcepto,
-  IColecta,
-  ICuotaHonorarioDetalle,
+  IFinanzasResumen,
+  IDetalleHonorario,
   IFirmas,
-} from './ActaJunta';
+} from './Minute';

@@ -1,12 +1,12 @@
 # Database Schema Documentation
 
-This document provides an overview of the MongoDB schemas for the Divino Maestro App.
+This document provides comprehensive documentation for the MongoDB schemas used in the Divino Maestro App.
 
 ## Overview
 
-The application uses MongoDB with Mongoose ODM to manage data for the Adoración Nocturna vigils.
+The application uses MongoDB with Mongoose ODM to manage data for the Adoración Nocturna vigils. The database schema is designed to consolidate related data, simplify queries, and match the operational workflow.
 
-## Schema Structure
+## Collections
 
 ### Authentication Schemas
 
@@ -54,6 +54,11 @@ The application uses MongoDB with Mongoose ODM to manage data for the Adoración
 
 ### Application Schemas
 
+The application schemas are designed around three main concepts:
+1. **Member** - Static information about members
+2. **Vigil** - Operational data during the vigil event
+3. **Minute** - Formal administrative records
+
 #### Seccion
 - **Collection**: `seccions`
 - **Purpose**: Represents a section/parish of Adoración Nocturna
@@ -65,152 +70,407 @@ The application uses MongoDB with Mongoose ODM to manage data for the Adoración
   - `activa`: Active status
   - `fechaCreacion`, `fechaActualizacion`: Timestamps
 
-#### Socio
-- **Collection**: `socios`
-- **Purpose**: Members and aspirants of the section
+#### Member
+- **Collection**: `members`
+- **Purpose**: Static information about members
 - **Fields**:
-  - `nombreCompleto`: Full name
-  - `seccionId`: Reference to Seccion
-  - `tipo`: Member type ('socio', 'aspirante', 'primera')
-  - `claseAdorador`: Member class ('aspirante', 'prueba', 'activo', 'honorario', 'baja', 'inactivo')
-  - `ordenVigilia`: Order number in vigil
-  - `telefono`, `email`, `direccion`, `domicilio`: Contact information
-  - `fechaIngreso`: Admission date
-  - `fechaPrueba`: Trial period start date
-  - `fechaActivacion`: Activation as full member date
-  - `activo`: Active status
-  - `presentadoPor`: Name of member who presented them
-  - `distintivos`: Array of distinctions/awards
-  - `historialEstados`: Array of status transitions
+  - `nombre`: Full name (indexed)
+  - `tipo`: Member type - `ACTIVO`, `ASPIRANTE`, `HONORARIO`, `VETERANO`
+  - `direccion`: Structured address object
+    - `calle`: Street
+    - `colonia`: Neighborhood
+    - `municipio`: Municipality
+  - `fechaIngreso`: Date joined
+  - `estado`: Current state - `ALTA`, `BAJA`, `LICENCIA`, `PRUEBA`
+  - `seccionId`: Reference to Seccion (optional)
+  - `telefono`: Phone number
+  - `email`: Email address
+  - `presentadoPor`: Who presented them
   - `notas`: Additional notes
   - `fechaCreacion`, `fechaActualizacion`: Timestamps
 - **Virtuals**:
-  - `domicilioCompleto`: Returns domicilio or direccion
+  - `direccionCompleta`: Returns complete address as string
+- **Indexes**:
+  - `nombre + estado`
+  - `seccionId + tipo`
+  - `email` (sparse)
 
-#### Vigilia
-- **Collection**: `vigilias`
-- **Purpose**: Represents a monthly vigil event
+**Key features:**
+- Simplified member types for better categorization
+- Clear states for tracking member status
+- Structured address for better data quality
+- Static information that changes infrequently
+
+#### Vigil
+- **Collection**: `vigils`
+- **Purpose**: Operational vigil document with live data
 - **Fields**:
-  - `seccionId`: Reference to Seccion
-  - `fecha`: Vigil date
-  - `fechaInicio`, `fechaFin`: Start and end times
-  - `turnoNumero`: Turn number
+  - `numeroTurno`: Turn number (indexed)
+  - `fechaInicio`: Start date/time (indexed)
+  - `fechaFin`: End date/time
+  - `parroquia`: Parish name
   - `titular`: Patron saint
-  - `capellan`, `jefe`: Chaplain and chief
-  - `portaHachas`: Array of torch bearers
-  - `ayudaronMisa`: Array of mass helpers
-  - `observaciones`: Notes
-  - `estado`: Status ('programada', 'en_curso', 'finalizada', 'cancelada')
+  - `asistencia`: Array of attendance records (embedded)
+    - `miembro`: Reference to Member
+    - `presente`: Attendance confirmed (boolean)
+    - `ordenLlegada`: Arrival order
+    - `finanzas`: Payment breakdown (embedded)
+      - `cuotasAtrasadas`: Overdue fees collected
+      - `cuotasMes`: Monthly fees collected
+      - `donativoExtra`: Extra donations
+  - `rolesGuardia`: Array of guard shift blocks (embedded)
+    - `bloqueHora`: Hour range (e.g., "De 10 a 11")
+    - `turnos`: Array of specific time slots
+      - `horaInicio`: Start time
+      - `horaFin`: End time
+      - `primerCoro`: Array of Member references (first choir)
+      - `segundoCoro`: Array of Member references (second choir)
+  - `rolesEspeciales`: Special roles (embedded)
+    - `portaHachas`: Array of Member references (torch bearers)
+    - `ayudaronMisa`: Array of Member references (mass helpers)
+  - `actaId`: Reference to Minute (one-to-one)
+  - `seccionId`: Reference to Seccion (optional)
+  - `estado`: Status - `programada`, `en_curso`, `finalizada`, `cancelada`
   - `fechaCreacion`, `fechaActualizacion`: Timestamps
 - **Virtuals**:
-  - `duracionHoras`: Calculated duration in hours
+  - `totalPresentes`: Count of members present
+  - `totalCuotasMes`: Sum of monthly fees collected
+  - `totalCuotasAtrasadas`: Sum of overdue fees collected
+  - `totalDonativosExtra`: Sum of extra donations
+  - `duracionHoras`: Duration of vigil in hours
+- **Indexes**:
+  - `numeroTurno + seccionId`
+  - `fechaInicio` (descending)
+  - `estado + fechaInicio`
 
-#### Asistencia
-- **Collection**: `asistencias`
-- **Purpose**: Tracks member attendance at vigils
-- **Fields**:
-  - `vigiliaId`: Reference to Vigilia
-  - `socioId`: Reference to Socio
-  - `efectiva`: Attendance confirmed (boolean)
-  - `ordenLlegada`: Arrival order
-  - `horaLlegada`, `horaSalida`: Arrival and departure times
-  - `observaciones`: Notes
-  - `fechaCreacion`, `fechaActualizacion`: Timestamps
-- **Virtuals**:
-  - `tiempoPermanciaHoras`: Calculated stay duration
-- **Unique Index**: `vigiliaId + socioId`
+**Key features:**
+- **Embedded attendance:** All attendance records embedded in the vigil document
+- **Individual finances:** Each attendance record has its own payment breakdown
+- **Embedded guard shifts:** Guard assignments organized by time blocks
+- **Special roles:** Porta-hachas and mass helpers tracked directly
+- **Virtual fields:** Automatic calculation of totals
 
-#### Cuota
-- **Collection**: `cuotas`
-- **Purpose**: Tracks fee payments and debts
+#### Minute
+- **Collection**: `minutes`
+- **Purpose**: Formal administrative record of the meeting
 - **Fields**:
-  - `socioId`: Reference to Socio
-  - `vigiliaId`: Optional reference to Vigilia
-  - `monto`: Amount
-  - `tipo`: Type ('pago' or 'adeudo')
-  - `concepto`: Payment concept
-  - `fechaPago`: Payment date
-  - `metodoPago`: Payment method ('efectivo', 'transferencia', 'otro')
-  - `referencia`: Payment reference
-  - `notas`: Additional notes
-  - `fechaCreacion`, `fechaActualizacion`: Timestamps
-
-#### GuardiaTurno
-- **Collection**: `guardiarturnos`
-- **Purpose**: Guard shift assignments during vigils
-- **Fields**:
-  - `vigiliaId`: Reference to Vigilia
-  - `rangoHora`: Hour range (e.g., "De 10 a 11")
-  - `horarioEspecifico`: Specific time slot (e.g., "10:45-11:00")
-  - `horaInicio`, `horaFin`: Start and end times
-  - `primerCoro`: Array of Socio references (first choir)
-  - `segundoCoro`: Array of Socio references (second choir)
-  - `observaciones`: Notes
-  - `fechaCreacion`, `fechaActualizacion`: Timestamps
-- **Virtuals**:
-  - `duracionMinutos`: Calculated duration in minutes
-  - `todosLosSocios`: Combined array of all assigned members
-
-#### ActaJunta
-- **Collection**: `actajuntas`
-- **Purpose**: Represents complete minutes of a Turn Board Meeting
-- **Fields**:
-  - `seccionId`: Reference to Seccion
-  - `vigiliaId`: Optional reference to Vigilia
-  - `fecha`: Meeting date
-  - `lugar`: Meeting location
-  - `referenciaParte`: Reference number (unique)
-  - `junta`: Meeting details (subdocument)
-    - `inicioHora`: Start time
-    - `leyoOrdenGeneral`: Whether general order was read
-    - `inscripcionHora`, `servicioHora`, `misaHora`: Event times
-  - `asistencia`: Attendance summary (subdocument)
-    - `activos`, `prueba`, `comuniones`, `aspirantes`, `extraordinaria`: Counts
-  - `asistenciaExtraordinariaDetalle`: Array of extraordinary attendees
-  - `lecturas`: Readings (subdocument)
-    - `circulares`, `correspondencia`: Boolean flags
-  - `movimientosMiembros`: Member movements (subdocument)
+  - `vigiliaId`: Reference to Vigil (required, unique - one-to-one)
+  - `horarios`: Meeting schedule (embedded)
+    - `inicioJunta`: Start time
+    - `lecturaOrden`: Whether general order was read
+    - `manifiesto`: Manifestation time
+    - `reservado`: Reserved time
+    - `misa`: Mass time
+  - `lecturas`: Readings and correspondence (embedded)
+    - `circulares`: Circular readings
+    - `correspondencia`: Correspondence
+  - `movimientos`: Administrative movements (embedded)
     - `vigiliaPrueba`: New members on trial
     - `solicitudesActivos`: Applications for active membership
     - `solicitudesHonorarios`: Applications for honorary membership
-    - `cambiosDomicilio`: Address changes
-    - `propuestasBaja`: Proposals for removal
-    - `propuestasDistintivos`: Proposals for distinctions
-  - `colecta`: Collection details (subdocument)
-    - `recibosMes`, `cuotasAdeudos`, `semillas`, `honorarios`: Amounts
-    - `otros`: Array of other concepts
-    - `sumaTotal`: Total sum
-  - `cuotasHonorariosDetalle`: Array of specific fee payments
+    - `cambiosDomicilio`: Address changes (references Member)
+    - `bajas`: Removals/departures (references Member)
+    - `distintivos`: Distinctions/awards (references Member)
   - `otrosAsuntos`: Other matters (text)
-  - `firmas`: Signatures (subdocument)
-    - `jefeDeTurno`, `secretario`, `tesorero`: Signature names
-  - `creadoEn`, `fechaActualizacion`: Timestamps
+  - `estadisticasAsistencia`: Attendance statistics (embedded)
+    - `activos`: Count of active members
+    - `prueba`: Count of trial members
+    - `comuniones`: Count of communions
+    - `aspirantes`: Count of aspirants
+    - `extraordinaria`: Count of extraordinary attendees
+    - `detalleExtraordinaria`: Array of extraordinary attendee details
+  - `finanzasResumen`: Financial summary (embedded)
+    - `recibosMes`: Monthly fees total
+    - `recibosAtrasados`: Overdue fees total
+    - `semillas`: Seeds/donations
+    - `honorarios`: Honorary fees
+    - `otrosConceptos`: Array of other concepts
+    - `sumaTotal`: Grand total
+  - `detalleHonorarios`: Array of specific honorary fee details
+  - `firmas`: Signatures (embedded)
+    - `jefeTurno`: Reference to Member (chief)
+    - `secretario`: Reference to Member (secretary)
+    - `tesorero`: Reference to Member (treasurer)
+  - `seccionId`: Reference to Seccion (optional)
+  - `fechaCreacion`, `fechaActualizacion`: Timestamps
 - **Virtuals**:
   - `totalAsistencia`: Calculated total attendance
-  - `colectaCalculada`: Calculated collection total for validation
+  - `finanzasCalculadas`: Calculated financial total for validation
+- **Indexes**:
+  - `vigiliaId` (unique - enforces one-to-one)
+  - `seccionId + fechaCreacion`
+
+**Key features:**
+- **One-to-one relationship with Vigil:** Each minute is tied to exactly one vigil
+- **Administrative movements:** Track member changes (address updates, removals, distinctions)
+- **Financial summary:** Totals automatically calculated from Vigil document
+- **References to Members:** Address changes, removals, and distinctions reference the Member collection
+
+## Operational Workflow
+
+The schema is designed to support this operational workflow:
+
+### 1. Initial Load: Create Member Documents
+
+When setting up the system, create a `Member` document for every member:
+
+```typescript
+import { Member } from '@/lib/database/models';
+
+await Member.create({
+  nombre: 'Juan Pérez López',
+  tipo: 'ACTIVO',
+  direccion: {
+    calle: 'Calle Principal 123',
+    colonia: 'Centro',
+    municipio: 'Zumpango del Río'
+  },
+  fechaIngreso: new Date('2020-01-15'),
+  estado: 'ALTA'
+});
+```
+
+### 2. Create Vigil: Start the Event
+
+When starting a new vigil, create a `Vigil` document and populate the attendance list:
+
+```typescript
+import { Vigil, Member } from '@/lib/database/models';
+
+// Get all active members
+const activeMembers = await Member.find({ estado: 'ALTA' });
+
+// Create vigil with pre-populated attendance
+const vigil = await Vigil.create({
+  numeroTurno: 15,
+  fechaInicio: new Date('2025-11-20T22:00:00'),
+  fechaFin: new Date('2025-11-21T06:00:00'),
+  titular: 'Santísimo Sacramento',
+  parroquia: 'De Zumpango del Río',
+  asistencia: activeMembers.map(member => ({
+    miembro: member._id,
+    presente: false,
+    finanzas: {
+      cuotasAtrasadas: 0,
+      cuotasMes: 0,
+      donativoExtra: 0
+    }
+  })),
+  rolesGuardia: [],
+  rolesEspeciales: {
+    portaHachas: [],
+    ayudaronMisa: []
+  },
+  estado: 'programada'
+});
+
+// Frontend downloads the vigil and displays attendance table
+const vigilWithMembers = await Vigil.findById(vigil._id)
+  .populate('asistencia.miembro')
+  .exec();
+```
+
+### 3. Save Operation: Update Attendance and Payments
+
+As members arrive and make payments, update the `Vigil` document:
+
+```typescript
+// Mark attendance and record payment
+await Vigil.updateOne(
+  { _id: vigilId, 'asistencia.miembro': memberId },
+  {
+    $set: {
+      'asistencia.$.presente': true,
+      'asistencia.$.ordenLlegada': 5,
+      'asistencia.$.finanzas.cuotasMes': 50,
+      'asistencia.$.finanzas.cuotasAtrasadas': 100
+    }
+  }
+);
+```
+
+### 4. Assign Guard Shifts
+
+During the vigil, assign guard shifts:
+
+```typescript
+await Vigil.updateOne(
+  { _id: vigilId },
+  {
+    $push: {
+      rolesGuardia: {
+        bloqueHora: 'De 10 a 11',
+        turnos: [{
+          horaInicio: '10:00',
+          horaFin: '10:15',
+          primerCoro: [member1Id, member2Id],
+          segundoCoro: [member3Id, member4Id]
+        }]
+      }
+    }
+  }
+);
+```
+
+### 5. Generate Acta: Create the Official Minute
+
+At the end of the vigil, the backend:
+1. Calculates all totals from the `Vigil` document
+2. Creates a `Minute` document with pre-filled financial data
+3. User only needs to fill text fields (readings, administrative movements)
+
+```typescript
+import { Minute, Vigil } from '@/lib/database/models';
+
+// Get vigil with all data
+const vigil = await Vigil.findById(vigilId).populate('asistencia.miembro');
+
+// Calculate financial totals
+const recibosMes = vigil.asistencia.reduce(
+  (sum, a) => sum + a.finanzas.cuotasMes,
+  0
+);
+const recibosAtrasados = vigil.asistencia.reduce(
+  (sum, a) => sum + a.finanzas.cuotasAtrasadas,
+  0
+);
+
+// Create minute with auto-calculated values
+const minute = await Minute.create({
+  vigiliaId: vigil._id,
+  horarios: {
+    inicioJunta: '21:00',
+    lecturaOrden: true,
+    manifiesto: '22:00',
+    reservado: '05:30',
+    misa: '06:00'
+  },
+  estadisticasAsistencia: {
+    activos: vigil.asistencia.filter(a => a.presente).length,
+    prueba: 0,
+    comuniones: 0,
+    aspirantes: 0,
+    extraordinaria: 0,
+    detalleExtraordinaria: []
+  },
+  finanzasResumen: {
+    recibosMes,
+    recibosAtrasados,
+    semillas: 0,
+    honorarios: 0,
+    otrosConceptos: [],
+    sumaTotal: recibosMes + recibosAtrasados
+  },
+  movimientos: {
+    vigiliaPrueba: [],
+    solicitudesActivos: [],
+    solicitudesHonorarios: [],
+    cambiosDomicilio: [],
+    bajas: [],
+    distintivos: []
+  },
+  firmas: {}
+});
+
+// Link minute back to vigil
+await Vigil.updateOne(
+  { _id: vigil._id },
+  { actaId: minute._id, estado: 'finalizada' }
+);
+```
+
+## Example Queries
+
+### Get all active members
+```typescript
+const activeMembers = await Member.find({ estado: 'ALTA' });
+```
+
+### Get vigil with full attendance details
+```typescript
+const vigil = await Vigil.findById(vigilId)
+  .populate('asistencia.miembro')
+  .populate('rolesGuardia.turnos.primerCoro')
+  .populate('rolesGuardia.turnos.segundoCoro')
+  .exec();
+```
+
+### Get minute with member references
+```typescript
+const minute = await Minute.findOne({ vigiliaId })
+  .populate('vigiliaId')
+  .populate('firmas.jefeTurno')
+  .populate('firmas.secretario')
+  .populate('firmas.tesorero')
+  .exec();
+```
+
+### Get all vigils in a date range
+```typescript
+const vigils = await Vigil.find({
+  fechaInicio: { $gte: startDate, $lte: endDate }
+})
+  .sort({ fechaInicio: -1 })
+  .populate('asistencia.miembro', 'nombre')
+  .exec();
+```
+
+### Calculate total fees collected in a month
+```typescript
+const vigils = await Vigil.find({
+  fechaInicio: { $gte: monthStart, $lte: monthEnd },
+  estado: 'finalizada'
+});
+
+const totalCollected = vigils.reduce((sum, vigil) =>
+  sum + vigil.totalCuotasMes + vigil.totalCuotasAtrasadas,
+  0
+);
+```
 
 ## Relationships
 
 ```
-Seccion (1) -> (n) Socio
-Seccion (1) -> (n) Vigilia
-Seccion (1) -> (n) ActaJunta
+Seccion (1) -> (n) Member
+Seccion (1) -> (n) Vigil
+Seccion (1) -> (n) Minute
 
-Vigilia (1) -> (n) Asistencia
-Vigilia (1) -> (n) GuardiaTurno
-Vigilia (1) -> (n) Cuota (optional)
-Vigilia (1) -> (1) ActaJunta (optional)
+Vigil (1) -> (n) Member (through asistencia.miembro)
+Vigil (1) -> (n) Member (through rolesGuardia.turnos.primerCoro/segundoCoro)
+Vigil (1) -> (n) Member (through rolesEspeciales)
+Vigil (1) -> (1) Minute (one-to-one through actaId)
 
-ActaJunta (1) -> (1) Vigilia (optional)
-ActaJunta (1) -> (1) Seccion
-
-Socio (1) -> (n) Asistencia
-Socio (1) -> (n) Cuota
-Socio (n) <-> (n) GuardiaTurno (through primerCoro/segundoCoro arrays)
+Minute (1) -> (1) Vigil (one-to-one, required)
+Minute (n) -> (1) Member (through firmas)
+Minute (n) -> (1) Member (through movimientos.cambiosDomicilio)
+Minute (n) -> (1) Member (through movimientos.bajas)
+Minute (n) -> (1) Member (through movimientos.distintivos)
 
 User (1) -> (n) Session
 User (1) -> (n) Account
 ```
+
+## Advantages of This Schema Design
+
+### 1. **Fewer Queries**
+Instead of 4-5 queries to load a vigil with attendance and shifts, you now need just 1 query with populate.
+
+### 2. **Atomic Updates**
+All attendance and payment data is in one document, making updates atomic and consistent.
+
+### 3. **Clear Workflow**
+The separation between `Vigil` (operational) and `Minute` (administrative) matches the real-world workflow.
+
+### 4. **Automatic Calculations**
+Virtual fields on `Vigil` automatically calculate totals, reducing the chance of errors.
+
+### 5. **Better Data Integrity**
+- One-to-one relationship between `Vigil` and `Minute` is enforced
+- Member references are always valid
+- Financial data is never orphaned
+
+### 6. **Simpler Address Changes**
+When a member changes address, you only update the `Member` document. Historical references in `Minute` documents remain correct through the reference.
 
 ## Indexes
 
@@ -220,146 +480,16 @@ All schemas include appropriate indexes for:
 - Unique constraints
 - TTL (Time To Live) for sessions and verifications
 
-## Usage Examples
-
-### Creating a Vigilia with ActaJunta
-
-```typescript
-import { Vigilia, ActaJunta, Socio, Asistencia, GuardiaTurno } from '@/lib/database/models';
-
-// Create a new vigilia
-const vigilia = await Vigilia.create({
-  seccionId: seccionId,
-  fecha: new Date('2025-11-15'),
-  fechaInicio: new Date('2025-11-15T22:00:00'),
-  fechaFin: new Date('2025-11-16T05:30:00'),
-  turnoNumero: 1,
-  titular: 'Santísimo Sacramento',
-  estado: 'programada'
-});
-
-// Create the ActaJunta (meeting minutes)
-const acta = await ActaJunta.create({
-  seccionId: seccionId,
-  vigiliaId: vigilia._id,
-  fecha: new Date('2025-11-16'),
-  lugar: 'Parroquia de San Miguel, Salón 2',
-  referenciaParte: 'Parte No. 45/2025',
-  junta: {
-    inicioHora: '09:00 PM',
-    leyoOrdenGeneral: true,
-    inscripcionHora: '09:15 PM',
-    servicioHora: '10:00 PM',
-    misaHora: '07:00 AM'
-  },
-  asistencia: {
-    activos: 25,
-    prueba: 3,
-    comuniones: 28,
-    aspirantes: 2,
-    extraordinaria: 5
-  },
-  lecturas: {
-    circulares: true,
-    correspondencia: false
-  },
-  movimientosMiembros: {
-    vigiliaPrueba: [
-      {
-        nombre: 'Carlos Mendoza Ruiz',
-        domicilio: 'Calle Sol 123',
-        presentadoPor: 'Miguel Ríos Bravo'
-      }
-    ],
-    solicitudesActivos: [],
-    solicitudesHonorarios: [],
-    cambiosDomicilio: [],
-    propuestasBaja: [],
-    propuestasDistintivos: []
-  },
-  colecta: {
-    recibosMes: 1500.50,
-    cuotasAdeudos: 850.00,
-    semillas: 300.00,
-    honorarios: 450.00,
-    otros: [],
-    sumaTotal: 3100.50
-  },
-  cuotasHonorariosDetalle: [],
-  firmas: {
-    jefeDeTurno: 'Firma de Alvaro González G.',
-    secretario: 'Firma de Antonio Bravo A.',
-    tesorero: 'Firma de Gabriel Real R.'
-  }
-});
-
-// Record attendance
-const asistencia = await Asistencia.create({
-  vigiliaId: vigilia._id,
-  socioId: socioId,
-  efectiva: true,
-  ordenLlegada: 1,
-  horaLlegada: new Date()
-});
-
-// Create guard shifts
-const turno = await GuardiaTurno.create({
-  vigiliaId: vigilia._id,
-  rangoHora: 'De 10 a 11',
-  horarioEspecifico: '10:45-11:00',
-  horaInicio: new Date('2025-11-15T22:45:00'),
-  horaFin: new Date('2025-11-15T23:00:00'),
-  primerCoro: [socioId1, socioId2],
-  segundoCoro: []
-});
-```
-
-### Managing Member Status Transitions
-
-```typescript
-import { Socio } from '@/lib/database/models';
-
-// Create a new aspirant
-const nuevoSocio = await Socio.create({
-  nombreCompleto: 'Juan Pérez López',
-  seccionId: seccionId,
-  tipo: 'aspirante',
-  claseAdorador: 'aspirante',
-  domicilio: 'Calle Principal 123',
-  presentadoPor: 'Miguel Ríos Bravo',
-  fechaIngreso: new Date()
-});
-
-// Promote to prueba (trial)
-nuevoSocio.claseAdorador = 'prueba';
-nuevoSocio.fechaPrueba = new Date();
-nuevoSocio.historialEstados = nuevoSocio.historialEstados || [];
-nuevoSocio.historialEstados.push({
-  estadoAnterior: 'aspirante',
-  estadoNuevo: 'prueba',
-  fecha: new Date(),
-  motivo: 'Completó período de aspirante',
-  autorizadoPor: 'Jefe de Turno'
-});
-await nuevoSocio.save();
-
-// Activate as full member
-nuevoSocio.claseAdorador = 'activo';
-nuevoSocio.fechaActivacion = new Date();
-nuevoSocio.historialEstados.push({
-  estadoAnterior: 'prueba',
-  estadoNuevo: 'activo',
-  fecha: new Date(),
-  motivo: 'Aprobado por la junta',
-  autorizadoPor: 'Jefe de Turno'
-});
-await nuevoSocio.save();
-```
+Key indexes:
+- `Member`: `nombre + estado`, `seccionId + tipo`, `email` (sparse)
+- `Vigil`: `numeroTurno + seccionId`, `fechaInicio` (desc), `estado + fechaInicio`
+- `Minute`: `vigiliaId` (unique), `seccionId + fechaCreacion`
 
 ## Notes
 
 - All date fields use JavaScript Date objects
-- Monetary amounts (cuotas) are stored as Numbers
+- Monetary amounts are stored as Numbers
 - Spanish field names are used to match domain terminology
 - TTL indexes automatically delete expired sessions and verifications
 - Virtual fields are computed but not stored in the database
+- The schema consolidates related data to reduce queries and improve consistency
