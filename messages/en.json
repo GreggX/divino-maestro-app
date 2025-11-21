@@ -69,6 +69,7 @@
   },
   "vigilia": {
     "title": "Vigil",
+    "titlePlural": "Vigils",
     "create": "Create Vigil",
     "edit": "Edit Vigil",
     "delete": "Delete Vigil",
@@ -77,6 +78,7 @@
     "endTime": "End Time",
     "turnNumber": "Turn Number",
     "patron": "Patron Saint",
+    "parish": "Parish",
     "chaplain": "Chaplain",
     "chief": "Chief",
     "torchBearers": "Torch Bearers",
@@ -87,6 +89,76 @@
       "en_curso": "In Progress",
       "finalizada": "Completed",
       "cancelada": "Cancelled"
+    },
+    "dashboard": {
+      "title": "Control Dashboard",
+      "startNewVigil": "Start New Vigil",
+      "vigilHistory": "Vigil History",
+      "manageMembers": "Manage Members",
+      "totalAttendance": "Total Attendance",
+      "draft": "Draft",
+      "completed": "Completed"
+    },
+    "attendance": {
+      "title": "Attendance & Finance Registration",
+      "summaryBar": "Summary",
+      "attendeeCount": "Attendees",
+      "totalMoney": "Total Money",
+      "activeMembers": "Active Members",
+      "present": "Present",
+      "absent": "Absent",
+      "financeButton": "Finances",
+      "visitors": "Visitors / Extraordinary",
+      "registerVisitor": "Register Visitor",
+      "visitorName": "Full Name",
+      "visitorTurn": "Turn of Origin",
+      "visitorAuth": "Authorized By",
+      "monthlyFee": "Monthly Fee",
+      "overdueFee": "Overdue Fee",
+      "extraDonation": "Extra Donation",
+      "saveAndClose": "Save & Close"
+    },
+    "guardAssignment": {
+      "title": "Guard Assignment",
+      "availableMembers": "Available Adorers",
+      "timeline": "Timeline",
+      "splitBlock": "Split Block",
+      "firstChoir": "First Choir",
+      "secondChoir": "Second Choir",
+      "specialRoles": "Special Roles",
+      "dragInstruction": "Drag names to assign shifts"
+    },
+    "minuteWizard": {
+      "title": "Minute Closure Wizard",
+      "step1": "Automatic Review",
+      "step2": "Administrative Movements",
+      "step3": "Formalities & Signatures",
+      "review": {
+        "title": "Review Summary",
+        "attendanceSummary": "Attendance Summary",
+        "financialSummary": "Financial Summary",
+        "validate": "Validate amounts match physical money"
+      },
+      "movements": {
+        "title": "Administrative Movements",
+        "aspirants": "Aspirants",
+        "applications": "Applications",
+        "changesRemovals": "Changes / Removals",
+        "newAspirant": "New Aspirant",
+        "sponsor": "Sponsor",
+        "addressChange": "Address Change",
+        "removal": "Removal",
+        "removalReason": "Reason for Removal"
+      },
+      "formalities": {
+        "title": "Formalities",
+        "readings": "Readings",
+        "readCirculars": "Read Circulars",
+        "correspondence": "Correspondence",
+        "otherMatters": "Other Matters",
+        "digitalSignatures": "Digital Signatures",
+        "generateMinute": "Generate Minute & Finalize"
+      }
     }
   },
   "socio": {

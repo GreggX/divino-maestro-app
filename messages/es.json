@@ -69,6 +69,7 @@
   },
   "vigilia": {
     "title": "Vigilia",
+    "titlePlural": "Vigilias",
     "create": "Crear Vigilia",
     "edit": "Editar Vigilia",
     "delete": "Eliminar Vigilia",
@@ -77,6 +78,7 @@
     "endTime": "Hora de Fin",
     "turnNumber": "Número de Turno",
     "patron": "Santo Titular",
+    "parish": "Parroquia",
     "chaplain": "Capellán",
     "chief": "Jefe",
     "torchBearers": "Porta Hachas",
@@ -87,6 +89,76 @@
       "en_curso": "En Curso",
       "finalizada": "Finalizada",
       "cancelada": "Cancelada"
+    },
+    "dashboard": {
+      "title": "Tablero de Control",
+      "startNewVigil": "Iniciar Nueva Vigilia",
+      "vigilHistory": "Historial de Vigilias",
+      "manageMembers": "Gestionar Miembros",
+      "totalAttendance": "Asistencia Total",
+      "draft": "Borrador",
+      "completed": "Finalizada"
+    },
+    "attendance": {
+      "title": "Registro de Asistencia y Finanzas",
+      "summaryBar": "Resumen",
+      "attendeeCount": "Asistentes",
+      "totalMoney": "Dinero Total",
+      "activeMembers": "Socios Activos",
+      "present": "Presente",
+      "absent": "Ausente",
+      "financeButton": "Finanzas",
+      "visitors": "Visitantes / Extraordinarios",
+      "registerVisitor": "Registrar Visitante",
+      "visitorName": "Nombre Completo",
+      "visitorTurn": "Turno de Procedencia",
+      "visitorAuth": "Autorizado Por",
+      "monthlyFee": "Cuota del Mes",
+      "overdueFee": "Cuota Atrasada",
+      "extraDonation": "Donativo Extra",
+      "saveAndClose": "Guardar y Cerrar"
+    },
+    "guardAssignment": {
+      "title": "Asignación de Guardias",
+      "availableMembers": "Adoradores Disponibles",
+      "timeline": "Línea de Tiempo",
+      "splitBlock": "Dividir Bloque",
+      "firstChoir": "Primer Coro",
+      "secondChoir": "Segundo Coro",
+      "specialRoles": "Roles Especiales",
+      "dragInstruction": "Arrastra los nombres para asignar turnos"
+    },
+    "minuteWizard": {
+      "title": "Asistente de Cierre de Acta",
+      "step1": "Revisión Automática",
+      "step2": "Movimientos Administrativos",
+      "step3": "Formalidades y Firmas",
+      "review": {
+        "title": "Resumen de Revisión",
+        "attendanceSummary": "Resumen de Asistencia",
+        "financialSummary": "Resumen Financiero",
+        "validate": "Valida que los montos cuadren con el dinero físico"
+      },
+      "movements": {
+        "title": "Movimientos Administrativos",
+        "aspirants": "Aspirantes",
+        "applications": "Solicitudes",
+        "changesRemovals": "Cambios / Bajas",
+        "newAspirant": "Nuevo Aspirante",
+        "sponsor": "Padrino",
+        "addressChange": "Cambio de Domicilio",
+        "removal": "Baja",
+        "removalReason": "Causa de la Baja"
+      },
+      "formalities": {
+        "title": "Formalidades",
+        "readings": "Lecturas",
+        "readCirculars": "Lectura de Circulares",
+        "correspondence": "Correspondencia",
+        "otherMatters": "Otros Asuntos",
+        "digitalSignatures": "Firmas Digitales",
+        "generateMinute": "Generar Acta y Finalizar"
+      }
     }
   },
   "socio": {
