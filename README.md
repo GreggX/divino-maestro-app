@@ -2,10 +2,6 @@
 
 A modern web application for managing religious brotherhood operations, built with Next.js, TypeScript, and MongoDB.
 
-## Overview
-
-Divino Maestro App is a comprehensive management system designed for religious brotherhoods (hermandades). It provides tools for member management, event coordination, guard duty scheduling, and administrative tasks.
-
 ## Core Features
 
 ### Member Management (Socios)
