@@ -1,0 +1,1 @@
+export { UpcomingVigils } from './UpcomingVigils';

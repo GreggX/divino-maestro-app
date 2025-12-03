@@ -1,7 +1,11 @@
 import { User } from '@/lib/database/models';
 import { hashPassword, verifyPassword, validatePassword } from './password';
-import { createToken, setSessionCookie, clearSessionCookie, getSession } from './jwt';
-import { SessionPayload } from './jwt';
+import {
+  createToken,
+  setSessionCookie,
+  clearSessionCookie,
+  getSession,
+} from './jwt';
 
 export interface SignUpData {
   email: string;
