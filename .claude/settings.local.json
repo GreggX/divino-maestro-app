@@ -27,7 +27,8 @@
       "Bash(./test-auth.sh:*)",
       "Bash(npm run test:e2e:*)",
       "WebSearch",
-      "Bash(npx husky init)"
+      "Bash(npx husky init)",
+      "Bash(mkdir:*)"
     ],
     "deny": [],
     "ask": []

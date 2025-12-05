@@ -42,6 +42,7 @@
   },
   "navigation": {
     "dashboard": "Dashboard",
+    "calendar": "Calendar",
     "vigilias": "Vigils",
     "socios": "Members",
     "actas": "Meeting Minutes",
@@ -202,5 +203,57 @@
     "created": "Created successfully",
     "updated": "Updated successfully",
     "deleted": "Deleted successfully"
+  },
+  "calendar": {
+    "title": "Vigil Calendar",
+    "description": "View and manage scheduled vigils",
+    "today": "Today",
+    "previousMonth": "Previous month",
+    "nextMonth": "Next month",
+    "loading": "Loading calendar...",
+    "error": "Error loading vigils",
+    "noEvents": "No scheduled vigils",
+    "createVigil": "New Vigil",
+    "confirmDelete": "Are you sure you want to delete this vigil?",
+    "deleting": "Deleting...",
+    "legend": {
+      "scheduled": "Scheduled",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    }
+  },
+  "upcomingVigils": {
+    "title": "Upcoming Vigils",
+    "description": "Vigils scheduled for the coming days",
+    "viewAll": "View calendar",
+    "noVigils": "No scheduled vigils",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "inDays": "In {days} days",
+    "turnLabel": "Turn {number}"
+  },
+  "vigilDetail": {
+    "title": "Vigil Details",
+    "turnNumber": "Turn #{number}",
+    "startDate": "Start date",
+    "endDate": "End date",
+    "duration": "Duration",
+    "hours": "hours",
+    "parish": "Parish",
+    "patron": "Patron"
+  },
+  "vigilForm": {
+    "createTitle": "Create New Vigil",
+    "editTitle": "Edit Vigil",
+    "turnNumber": "Turn Number",
+    "status": "Status",
+    "patron": "Patron Saint",
+    "patronPlaceholder": "E.g.: Sacred Heart of Jesus",
+    "parish": "Parish",
+    "parishPlaceholder": "E.g.: St. John the Baptist",
+    "startDate": "Start date and time",
+    "endDate": "End date and time",
+    "errorSaving": "Error saving vigil"
   }
 }

@@ -42,6 +42,7 @@
   },
   "navigation": {
     "dashboard": "Panel",
+    "calendar": "Calendario",
     "vigilias": "Vigilias",
     "socios": "Socios",
     "actas": "Actas de Junta",
@@ -202,5 +203,57 @@
     "created": "Creado exitosamente",
     "updated": "Actualizado exitosamente",
     "deleted": "Eliminado exitosamente"
+  },
+  "calendar": {
+    "title": "Calendario de Vigilias",
+    "description": "Visualiza y gestiona las vigilias programadas",
+    "today": "Hoy",
+    "previousMonth": "Mes anterior",
+    "nextMonth": "Mes siguiente",
+    "loading": "Cargando calendario...",
+    "error": "Error al cargar las vigilias",
+    "noEvents": "No hay vigilias programadas",
+    "createVigil": "Nueva Vigilia",
+    "confirmDelete": "¿Estás seguro de que deseas eliminar esta vigilia?",
+    "deleting": "Eliminando...",
+    "legend": {
+      "scheduled": "Programada",
+      "inProgress": "En Curso",
+      "completed": "Finalizada",
+      "cancelled": "Cancelada"
+    }
+  },
+  "upcomingVigils": {
+    "title": "Próximas Vigilias",
+    "description": "Vigilias programadas para los próximos días",
+    "viewAll": "Ver calendario",
+    "noVigils": "No hay vigilias programadas",
+    "today": "Hoy",
+    "tomorrow": "Mañana",
+    "inDays": "En {days} días",
+    "turnLabel": "Turno {number}"
+  },
+  "vigilDetail": {
+    "title": "Detalles de la Vigilia",
+    "turnNumber": "Turno #{number}",
+    "startDate": "Fecha de inicio",
+    "endDate": "Fecha de fin",
+    "duration": "Duración",
+    "hours": "horas",
+    "parish": "Parroquia",
+    "patron": "Titular"
+  },
+  "vigilForm": {
+    "createTitle": "Crear Nueva Vigilia",
+    "editTitle": "Editar Vigilia",
+    "turnNumber": "Número de Turno",
+    "status": "Estado",
+    "patron": "Santo Titular",
+    "patronPlaceholder": "Ej: Sagrado Corazón de Jesús",
+    "parish": "Parroquia",
+    "parishPlaceholder": "Ej: San Juan Bautista",
+    "startDate": "Fecha y hora de inicio",
+    "endDate": "Fecha y hora de fin",
+    "errorSaving": "Error al guardar la vigilia"
   }
 }

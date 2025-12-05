@@ -10,7 +10,9 @@ test.describe('Homepage', () => {
     await page.goto('/login');
 
     // Check for essential elements (Spanish is the default locale)
-    await expect(page.getByRole('heading', { name: /inicia sesión en tu cuenta/i })).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: /inicia sesión en tu cuenta/i })
+    ).toBeVisible();
     await expect(page.getByLabel(/email/i)).toBeVisible();
     await expect(page.getByLabel(/password/i)).toBeVisible();
     await expect(page.getByRole('button', { name: /sign in/i })).toBeVisible();
@@ -30,7 +32,9 @@ test.describe('Register Page', () => {
     await page.goto('/register');
 
     // Heading is in Spanish (default locale) but form labels are in English (hardcoded in RegisterForm)
-    await expect(page.getByRole('heading', { name: /crea tu cuenta/i })).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: /crea tu cuenta/i })
+    ).toBeVisible();
     await expect(page.getByLabel(/name/i)).toBeVisible();
     await expect(page.getByLabel(/email/i)).toBeVisible();
     await expect(page.getByLabel(/password/i)).toBeVisible();

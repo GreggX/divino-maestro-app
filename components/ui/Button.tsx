@@ -28,7 +28,7 @@ export function Button({
     secondary:
       'bg-gray-200 text-gray-900 hover:bg-gray-300 focus-visible:ring-gray-500',
     outline:
-      'border-2 border-gray-300 bg-transparent hover:bg-gray-50 focus-visible:ring-gray-500',
+      'border-2 border-gray-300 bg-transparent text-gray-900 hover:bg-gray-50 focus-visible:ring-gray-500',
     danger: 'bg-red-600 text-white hover:bg-red-700 focus-visible:ring-red-600',
   };
 
